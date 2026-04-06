@@ -1,0 +1,47 @@
+// LEETCODE PROBLEM NUMBER 54
+import java.util.*;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans = new ArrayList<>();
+
+        int startrow = 0;
+        int startcol = 0;
+        int endrow = matrix.length - 1;
+        int endcol = matrix[0].length - 1;
+
+        while (startrow <= endrow && startcol <= endcol) {
+
+            // TOP
+            for (int i = startcol; i <= endcol; i++) {
+                ans.add(matrix[startrow][i]);
+            }
+
+            // RIGHT
+            for (int i = startrow + 1; i <= endrow; i++) {
+                ans.add(matrix[i][endcol]);
+            }
+
+            // BOTTOM
+            if (startrow < endrow) {
+                for (int i = endcol - 1; i >= startcol; i--) {
+                    ans.add(matrix[endrow][i]);
+                }
+            }
+
+            // LEFT
+            if (startcol < endcol) {
+                for (int i = endrow - 1; i > startrow; i--) {
+                    ans.add(matrix[i][startcol]);
+                }
+            }
+
+            startrow++;
+            startcol++;
+            endrow--;
+            endcol--;
+        }
+
+        return ans;
+    }
+}
