@@ -1,0 +1,53 @@
+// LEETCODE PROBLEM NUMBER 59 
+class Solution {
+    public static int[][] generateMatrix(int n) {
+        int[][] matrix = new int[n][n];
+
+        int startrow = 0, startcol = 0;
+        int endrow = n - 1, endcol = n - 1;
+        int num = 1;
+
+        while (startrow <= endrow && startcol <= endcol) {
+
+            // top
+            for (int i = startcol; i <= endcol; i++) {
+                matrix[startrow][i] = num++;
+            }
+
+            // right
+            for (int i = startrow + 1; i <= endrow; i++) {
+                matrix[i][endcol] = num++;
+            }
+
+            // bottom
+            for (int i = endcol - 1; i >= startcol; i--) {
+                if (startrow == endrow) break;
+                matrix[endrow][i] = num++;
+            }
+
+            // left
+            for (int i = endrow - 1; i > startrow; i--) {
+                if (startcol == endcol) break;
+                matrix[i][startcol] = num++;
+            }
+
+            startrow++;
+            startcol++;
+            endrow--;
+            endcol--;
+        }
+
+        return matrix;
+    }
+   public static void main(String args[]) {
+        int n = 3;
+        int[][] result = generateMatrix(n);
+
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+}
+}
